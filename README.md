@@ -29,7 +29,7 @@ _Pre-requisites: you'll need to have a Fat Free CRM instance up and running._
 If you'd like to develop this gem locally, it's worth knowing about the ```bundler config.local``` command. This will use your local copy of the gem (if it exists) when you are on your local machine but selects the github version when the code is running on your server.
 
 * Clone ffcrm_attachment from github ```git clone https://github.com/crossroads/ffcrm_attachments.git```
-* And setup bunlder to use it: ```bundle config local.ffcrm_attachment /path/to/ffcrm_attachments```
+* And setup bunlder to use it: ```bundle config local.ffcrm_attachments /path/to/ffcrm_attachments```
 
 Read more at http://ryanbigg.com/2013/08/bundler-local-paths/ and http://bundler.io/v1.3/git.html
 
