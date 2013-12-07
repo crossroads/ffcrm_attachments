@@ -15,14 +15,18 @@
             require.config({
                 baseUrl: "/assets",
                 paths: {
-                    "jquery": "jquery",
+                    // "jquery": "jquery",
                     "jquery.ui.widget": "ffcrm_attachments/vendor/jquery.ui.widget"
                 },
             });
 
-            ///load others file upload jquery scripts per http://blueimp.github.io/jQuery-File-Upload/
+            //declare jquery here will load it againce, duplicated if there exists a global one (which we do) 
+            //this cause conflict e.g. override $ again and need to invoke $.noConflict again, plugin namespace polluted etc
+            //workaround to make existing jquery available to requirejs
+            // http://blog.falafel.com/blogs/basem-emara/2013/03/01/how-to-avoid-loading-jquery-twice-with-requirejs
+            define('jquery', [], function () { return window.jQuery; });
 
-            // //jquery shim remote path
+            ///load others file upload jquery scripts per http://blueimp.github.io/jQuery-File-Upload/
             require(["ffcrm_attachments/jquery.fileupload"], function(fileupload) {
                 //     //return an object to define the "my/shirt" module.
                 console.log('fileupload loaded');
@@ -32,4 +36,4 @@
         .fail(function(jqxhr, settings, exception) {
             console.log(arguments);
         });
-})($);
+})(jQuery);
