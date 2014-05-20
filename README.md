@@ -9,6 +9,10 @@ _Pre-requisites: you'll need to have a Fat Free CRM instance up and running._
 
 ```gem 'ffcrm_attachments', github: 'crossroads/ffcrm_attachments', branch: 'master'```
 
+* Then migrate your database to get the new Attachments table
+
+```bundle exec rake db:migrate```
+
 * Start your Fat Free CRM server and edit a contact/account etc... You should be able to attach multiple files and download them.
 
 ## TODO
