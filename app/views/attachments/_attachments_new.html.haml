@@ -1,0 +1,32 @@
+- edit ||= false
+- collapsed = session[:entity_extra].nil?
+= subtitle :entity_extra, collapsed, t(:extra_info)
+.section
+  %small#entity_extra_intro{ hidden_if(!collapsed) }
+    = t(:intro, t(:extra_info_small)) unless edit
+  #entity_extra{ hidden_if(collapsed) }
+    %table
+      %tr
+        %td
+          -# debugger
+          =# .label #{t :attachment}:
+          -# entity.attachments.build
+          -# fields_for :attachments do |attachment_field|
+            -# attachment_field.file_field :attachment
+
+          = hidden_field_tag 'entity_id', entity.id        
+          = hidden_field_tag 'entity_type', entity.class.name
+          = file_field_tag 'fileupload', :multiple=>true, "data-url"=>"#{entity.id}/attachments/create"
+
+          :javascript
+            jQuery(function () {
+                jQuery('#fileupload').fileupload({
+                    dataType: 'json',
+                    done: function (e, data) {
+                        jQuery.each(data.result.files, function (index, file) {
+                            jQuery('<p/>').text(file.name).appendTo(document.body);
+                        });
+                    }
+                });
+            });
+
