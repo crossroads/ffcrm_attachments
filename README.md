@@ -22,6 +22,7 @@ _Pre-requisites: you'll need to have a Fat Free CRM instance up and running._
 * Write the UI code that will display when the entity is being editting - it should allow multiple files to be uploaded to the contact.
 * Write the UI code that will display files attached to the entity.
 * Write some rspecs for File class - suggest using ```factory_girl```)
+** Follow similiar plugin test architecture to the FfcrmMailchimp plugin (https://github.com/crossroads/ffcrm_mailchimp/tree/master/spec)
 * Implement security for the File class - it should be able to do whatever the parent class allows. (I.e. if you are allowed to see a contact, then you are allowed to download the attached file.)
 * Add javascript to provide 'drag and drop' file capability when editting an entity
 
