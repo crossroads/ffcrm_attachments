@@ -1,1 +1,14 @@
-something
+- collapsed = session[:entity_extra].nil?
+= subtitle :entity_extra, collapsed, t(:extra_doc)
+.section
+  %small#entity_extra_intro{ hidden_if(!collapsed) }
+    = t(:intro, t(:extra_info_small))
+  #entity_extra{ hidden_if(collapsed) }
+    %table
+      %tr
+        %td
+          - if entity.attachments.present?
+            - entity.attachments.each do |attach|
+              .attach_block
+                = link_to attachment_preview(attach), download_attachment_path(attach)
+                .file_name= file_name(attach)

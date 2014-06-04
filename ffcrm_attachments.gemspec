@@ -17,6 +17,7 @@ Gem::Specification.new do |s|
 
   s.add_dependency "rails", "~> 3.2.14"
   s.add_dependency "paperclip"
+  s.add_dependency 'simple_form', '~> 2.0.1'
   # s.add_dependency "jquery-rails"
 
   s.add_development_dependency "pg"
