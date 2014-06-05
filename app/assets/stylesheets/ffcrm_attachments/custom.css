@@ -12,5 +12,49 @@
 
 .attach_block {
   display: inline-block;
-  width: 25%;
+  width: 18%;
+  margin-bottom: 2%;
+}
+
+#attach {
+  width: 17% !important;
+  display: inline;
+}
+
+.attach_div {
+  width: 500px;
+  display: block;
+}
+
+.file_size {
+  display: inline-block;
+  font-size: 13px;
+  line-height: 22px;
+  margin-left: 58%;
+  vertical-align: bottom;
+}
+
+.current_file_name {
+  display: inline;
+  position: absolute;
+  font-size: 13px;
+  margin-left: 10px;
+  margin-top: 8px;
+  width: 27%;
+}
+
+.remove_link {
+  float: right;
+  display: none;
+  font-size: 13px;
+  margin-left: 10px;
+  margin-top: 8px;
+}
+
+.display_remove {
+  display: inline;
+}
+
+.section table {
+  width: 100%;
 }

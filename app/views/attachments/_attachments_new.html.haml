@@ -1,13 +1,19 @@
 - edit ||= false
 - collapsed = session[:entity_extra].nil?
+- entity.attachments.build
+
 = subtitle :entity_extra, collapsed, t(:extra_doc)
 .section
   %small#entity_extra_intro{ hidden_if(!collapsed) }
     = t(:intro, t(:extra_info_small)) unless edit
   #entity_extra{ hidden_if(collapsed) }
-    %table
+    %table{class: f.object.new_record? ? "" : "edit_form"}
       %tr
         %td
-          - entity.attachments.build
           = f.simple_fields_for :attachments do |t|
-            = t.file_field 'attachment', id: 'attach'
+            .attach_div
+              = t.file_field 'attachment', id: 'attach', "_destroy" => 'false'
+              .current_file_name= t.object.try(:attachment_file_name)
+              .file_size= number_to_human_size(t.object.try(:attachment_file_size)) unless t.object.new_record?
+              .remove_link{class: t.object.new_record? ? "" : "display_remove"}= link_to 'Remove', '#'
+          .next_attachment
