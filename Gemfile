@@ -16,4 +16,6 @@ gem "jquery-rails"
 gem 'fat_free_crm', github: 'fatfreecrm/fat_free_crm'
 
 # To use debugger
-gem 'debugger'
+group :development do
+  gem 'byebug'
+end
