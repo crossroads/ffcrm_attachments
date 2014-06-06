@@ -55,6 +55,6 @@
   display: inline;
 }
 
-.section table {
+.section #entity_extra table {
   width: 100%;
 }
