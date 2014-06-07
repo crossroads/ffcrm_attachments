@@ -13,7 +13,7 @@ gem "jquery-rails"
 # Git. Remember to move these dependencies to your gemspec before releasing
 # your gem to rubygems.org.
 
-gem 'fat_free_crm', github: 'fatfreecrm/fat_free_crm'
+# gem 'fat_free_crm', github: 'fatfreecrm/fat_free_crm'
 
 # To use debugger
 group :development do
