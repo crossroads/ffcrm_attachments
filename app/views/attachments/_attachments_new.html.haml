@@ -1,3 +1,4 @@
+- attach_limit_size = Setting.attachment_size
 - edit = !f.object.new_record?
 - collapsed = session[:entity_extra].nil?
 - entity.attachments.build
@@ -9,7 +10,7 @@
     = t(:intro, t(:extra_info_small)) unless edit
 
   #entity_extra{ hidden_if(collapsed) }
-    %table{class: edit ? "edit_form" : "" }
+    %table{class: edit ? "edit_form" : "", 'attach_limit' => attach_limit_size }
       %tr
         %td
           = f.simple_fields_for :attachments do |t|

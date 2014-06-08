@@ -14,21 +14,34 @@ $("#submit_with_file").live("click", function(event) {
 });
 
 $("#attach").live('change', function (){
-  var last_file_input = $("#entity_extra").find('input').last()[0].files
+  var parent_div = $(this).closest(".attach_div");
+  var attach_limit = $(parent_div.closest('table')[0]).attr("attach_limit");
+  var attach_limit_size = file_size_in_bytes(attach_limit);
+  var file_type = this.files[0].type;
 
-  // append file input
-  append_file_input(last_file_input)
+  if((file_type == "") || (this.files[0].size > attach_limit_size)) {
+    error_msg = (file_type == "") ? "Invalid file type" : "File size is too long."
+    parent_div.find('.current_file_name').addClass('error').html(error_msg);
+    $(this).val('');
+    parent_div.find(".file_size").html('');
+    parent_div.find(".remove_link").hide();
+  } else {
+    var last_file_input = $("#entity_extra").find('input').last()[0].files
 
-  // display attachment-name
-  var file_name = this.files[0].name
-  $(this).closest(".attach_div").find('.current_file_name').html(file_name)
+    // append file input
+    append_file_input(last_file_input)
 
-  // display attachment-size
-  var file_size = get_file_size(this.files[0])
-  $(this).closest(".attach_div").find(".file_size").html(file_size)
+    // display attachment-name
+    var file_name = this.files[0].name
+    parent_div.find('.current_file_name').removeClass("error").html(file_name)
 
-  // display remove attachment link
-  $(this).closest(".attach_div").find(".remove_link").show();
+    // display attachment-size
+    var file_size = get_file_size(this.files[0])
+    parent_div.find(".file_size").html(file_size)
+
+    // display remove attachment link
+    parent_div.find(".remove_link").show();
+  }
 });
 
 $(".remove_link").live('click', function(){
@@ -70,6 +83,14 @@ function get_file_size(file) {
     i++;
   }
   value = (Math.round(fSize*100)/100) + ' ' + fSExt[i]
+  return value;
+}
+
+function file_size_in_bytes(limit_size) {
+  var size_arr = limit_size.split(' ');
+  var fSExt = new Array('Bytes', 'KB', 'MB', 'GB');
+  index = $.inArray(size_arr[1], fSExt)
+  value = size_arr[0] * (1024*index)
   return value;
 }
 

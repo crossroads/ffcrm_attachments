@@ -58,3 +58,7 @@
 .section #entity_extra table {
   width: 100%;
 }
+
+.error {
+  color: red;
+}
