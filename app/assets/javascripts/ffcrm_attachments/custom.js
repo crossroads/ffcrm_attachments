@@ -90,7 +90,13 @@ function file_size_in_bytes(limit_size) {
   var size_arr = limit_size.split(' ');
   var fSExt = new Array('Bytes', 'KB', 'MB', 'GB');
   index = $.inArray(size_arr[1], fSExt)
-  value = size_arr[0] * (1024*index)
+  multiplier = 1
+  i = 1
+  while(i<=index){
+    multiplier = multiplier * 1024;
+    i++;
+  }
+  value = size_arr[0] * multiplier;
   return value;
 }
 
