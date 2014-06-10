@@ -14,8 +14,8 @@ require File.expand_path('../boot', __FILE__)
 require 'rails/all'
 
 Bundler.require
-require "fat_free_crm"
 require "ffcrm_attachments"
+require "fat_free_crm"
 
 module Dummy
   class Application < Rails::Application
