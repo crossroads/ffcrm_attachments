@@ -5,18 +5,23 @@ A plugin for Fat Free CRM that provides the ability to add one or many attachmen
 
 _Pre-requisites: you'll need to have a Fat Free CRM instance up and running._
 
-* Add ```ffcrm_attachments``` to your Fat Free CRM Gemfile and run ```bundle install```.
-
-      gem 'ffcrm_attachments', github: 'crossroads/ffcrm_attachments', branch: 'master'
+* Add ```ffcrm_attachments``` to your Fat Free CRM Gemfile and run ```bundle install```
+```ruby
+gem 'ffcrm_attachments', github: 'crossroads/ffcrm_attachments', branch: 'master'
+```
 
 * Then migrate your database to get the new Attachments table
-      bundle exec rake db:migrate
+```ruby
+bundle exec rake db:migrate
+```
 
 * Add default settings for attachments as: (In your config/settings.default.yml)
-      :attachment_size: '5 MB'
-      :attachment_appears_on: 'left'
-      # options: 'left' => display attachments in sidebar details
-      # options: 'right' => display attachments with preview on show page.
+```ruby
+:attachment_size: '5 MB'
+:attachment_appears_on: 'left'
+# options: 'left' => display attachments in sidebar details
+# options: 'right' => display attachments with preview on show page.
+```
 
 * Start your Fat Free CRM server and edit a contact/account etc... You should be able to attach multiple files and download them.
 
@@ -49,9 +54,13 @@ _Pre-requisites: you'll need to have a Fat Free CRM instance up and running._
 If you'd like to develop this gem locally, it's worth knowing about the ```bundler config.local``` command. This will use your local copy of the gem (if it exists) when you are on your local machine but selects the github version when the code is running on your server.
 
 * Clone ffcrm_attachment from github
-      git clone https://github.com/crossroads/ffcrm_attachments.git
+```ruby
+git clone https://github.com/crossroads/ffcrm_attachments.git
+```
 * And setup bunlder to use it:
-      bundle config local.ffcrm_attachments /path/to/ffcrm_attachments
+```ruby
+bundle config local.ffcrm_attachments /path/to/ffcrm_attachments
+```
 
 Read more at http://ryanbigg.com/2013/08/bundler-local-paths/ and http://bundler.io/v1.3/git.html
 
