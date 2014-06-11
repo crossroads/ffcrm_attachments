@@ -12,4 +12,9 @@ class AttachmentHook < FatFreeCRM::Callback::Base
       locals: { entity: resource })
   end
 
+  insert_after :sidebar_files_section do |view, resource|
+    view.render(partial: "attachments/sidebar_attachments",
+      locals: { entity: resource })
+  end
+
 end
