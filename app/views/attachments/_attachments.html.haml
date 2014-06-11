@@ -1,8 +1,6 @@
 - collapsed = session[:entity_extra].nil?
 = subtitle :entity_extra, collapsed, t(:extra_doc)
 .section
-  %small#entity_extra_intro{ hidden_if(!collapsed) }
-    = t(:intro, t(:extra_info_small))
   #entity_extra{ hidden_if(collapsed) }
     %table
       %tr
