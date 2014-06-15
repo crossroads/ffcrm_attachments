@@ -79,6 +79,9 @@ GEM
     authlogic (3.1.0)
       activerecord (>= 3.0.7)
       activerecord (>= 3.0.7)
+    aws-sdk (1.43.2)
+      json (~> 1.4)
+      nokogiri (>= 1.4.4)
     builder (3.0.4)
     byebug (3.1.2)
       columnize (~> 0.8)
@@ -215,6 +218,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  aws-sdk
   byebug
   factory_girl_rails
   fat_free_crm!

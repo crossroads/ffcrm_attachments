@@ -14,8 +14,16 @@ class Attachment < ActiveRecord::Base
 
   do_not_validate_attachment_file_type :attachment
 
-  has_attached_file :attachment,
+  if Rails.env != 'test' && Setting.storage_at_s3
+    has_attached_file :attachment,
+      styles:         lambda{ |a| ATTACHMENT_FORMATS.include?(a.content_type) ? STYLES : {} },
+      storage:        :s3,
+      s3_credentials: Setting.s3_credentials,
+      s3_protocol:    'http'
+  else
+    has_attached_file :attachment,
     styles: lambda{ |a| ATTACHMENT_FORMATS.include?(a.content_type) ? STYLES : {} }
+  end
 
   def to_default_image
     default = "default-document.jpg"
