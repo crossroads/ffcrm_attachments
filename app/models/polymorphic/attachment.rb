@@ -16,13 +16,17 @@ class Attachment < ActiveRecord::Base
 
   if Rails.env != 'test' && Setting.storage_at_s3
     has_attached_file :attachment,
-      styles:         lambda{ |a| ATTACHMENT_FORMATS.include?(a.content_type) ? STYLES : {} },
+      styles:         lambda{ |a| a.instance.get_attachment_styles },
       storage:        :s3,
       s3_credentials: Setting.s3_credentials,
       s3_protocol:    'http'
   else
     has_attached_file :attachment,
-    styles: lambda{ |a| ATTACHMENT_FORMATS.include?(a.content_type) ? STYLES : {} }
+    styles: lambda{ |a| a.instance.get_attachment_styles }
+  end
+
+  def get_attachment_styles
+    ATTACHMENT_FORMATS.include?(attachment.content_type) ? STYLES : {}
   end
 
   def to_default_image
