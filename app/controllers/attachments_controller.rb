@@ -1,42 +1,19 @@
 class AttachmentsController < ApplicationController
 
+  def download
+    attach = Attachment.find(params[:id])
 
-  #----------------------------------------------------------------------------
-  def create
-
-  	#debugger
-
-  	@attachment = Attachment.new()
-  	@attachment.attachment = params['fileupload']
-  	@attachment.entity_type = params['entity_type']
-  	@attachment.entity_id = params['id']
-  	@attachment.save
-
-    render(json: to_fileupload(@attachment))
+    if Setting.storage_at_s3
+      data = open attach.attachment.url(:original)
+      send_data data.read, type: attach.attachment.content_type, disposition: 'inline'
+    else
+      send_file attach.attachment.path(:original), disposition: 'attachment'
+    end
   end
 
-  def show
-
-  	@attachment = Attachment.find(params[:id])
-  	send_file attachment.attachment_file_name, :type=>attachment.attachment_content_type, :disposition => 'inline'
-
+  def remove
+    attach = Attachment.find(params[:id])
+    attach.destroy
+    render json: { status: true }
   end
-
-  protected
-
-  def to_fileupload(attachment)
-  	{
-	    files: [
-	      {
-	        id:   attachment.entity_id,
-	        name: attachment.attachment_file_name,
-	        type: attachment.attachment_content_type,
-	        size: attachment.attachment_file_size,
-	        #url:  (url_for :controller=> 'attachments', :id => attachment.id)
-	        url:  "/attachments/#{attachment.id}"
-	      }
-	    ]
-	}
-  end
-
- end
+end

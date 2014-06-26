@@ -1,18 +1,27 @@
 require File.expand_path('../boot', __FILE__)
 
-# Pick the frameworks you want:
-require "active_record/railtie"
-require "action_controller/railtie"
-require "action_mailer/railtie"
-require "active_resource/railtie"
-require "sprockets/railtie"
-# require "rails/test_unit/railtie"
+# # Pick the frameworks you want:
+# require "active_record/railtie"
+# require "action_controller/railtie"
+# require "action_mailer/railtie"
+# require "active_resource/railtie"
+# require "sprockets/railtie"
+# # require "rails/test_unit/railtie"
 
-Bundler.require(*Rails.groups)
+# Bundler.require(*Rails.groups)
+# require "ffcrm_attachments"
+
+require 'rails/all'
+
+Bundler.require
 require "ffcrm_attachments"
+require "fat_free_crm"
 
 module Dummy
   class Application < Rails::Application
+    Railties.engines.each do |engine|
+      config.paths['db/migrate'] += engine.paths['db/migrate'].existent
+    end
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.

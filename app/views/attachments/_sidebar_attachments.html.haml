@@ -1,0 +1,5 @@
+.caption Documents
+- if entity.attachments.present?
+  - entity.attachments.each do |attach|
+    %li
+      %tt= link_to file_name(attach), download_attachment_path(attach)
