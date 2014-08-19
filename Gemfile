@@ -18,5 +18,6 @@ gem 'fat_free_crm', github: 'fatfreecrm/fat_free_crm'
 
 # To use debugger
 group :development do
-  gem 'byebug'
+  gem 'byebug', platform: 'ruby_20'
+  gem 'debugger', platform: 'ruby_19'
 end

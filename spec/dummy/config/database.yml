@@ -15,9 +15,9 @@
 development:
   adapter: postgresql
   encoding: unicode
-  database: dummy_development
+  database: ffcrm_attachments_development
   pool: 5
-  username: dummy
+  username:
   password:
 
   # Connect on a TCP socket. Omitted by default since the client uses a
@@ -41,15 +41,15 @@ development:
 test:
   adapter: postgresql
   encoding: unicode
-  database: dummy_test
+  database: ffcrm_attachments_test
   pool: 5
-  username: dummy
+  username:
   password:
 
 production:
   adapter: postgresql
   encoding: unicode
-  database: dummy_production
+  database: ffcrm_attachments_production
   pool: 5
-  username: dummy
+  username:
   password:
