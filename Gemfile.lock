@@ -35,7 +35,6 @@ PATH
   remote: .
   specs:
     ffcrm_attachments (0.0.1)
-      fat_free_crm
       paperclip
       rails (~> 3.2.14)
       simple_form (~> 2.0.1)
