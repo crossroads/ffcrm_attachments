@@ -1,23 +1,48 @@
-class AttachmentHook < FatFreeCRM::Callback::Base
+module FfcrmAttachment
 
-  insert_before :add_file_section do |view, context|
+  class AttachmentHook < FatFreeCRM::Callback::Base
 
-    object_name = view.instance_variable_get(:@virtual_path).split("/").first
-    object = view.instance_variable_get(("@"+object_name.singularize).to_sym)
+    insert_after :entity_form do |view, context|
+      f = context[:f]
+      entity = context[:entity]
+      view.render(partial: "attachments/attachments_new", locals: {entity: entity , f: f})
+    end
 
-    f = context
-    view.render(partial: "attachments/attachments_new",
-      locals: {entity: object , f: f})
-  end
+    insert_after :entity_update do |view, context|
+      entity = context[:entity]
+      view.render(partial: "attachments/attachments_update", locals: { entity: entity })
+    end
 
-  insert_after :show_files_section do |view, resource|
-    view.render(partial: "attachments/attachments",
-      locals: { entity: resource })
-  end
+    insert_after :show_contact_bottom do |view, context|
+      entity = context[:entity]
+      view.render(partial: "attachments/attachments", locals: { entity: entity })
+    end
 
-  insert_after :sidebar_files_section do |view, resource|
-    view.render(partial: "attachments/sidebar_attachments",
-      locals: { entity: resource })
+    insert_after :show_campaign_bottom do |view, context|
+      entity = context[:entity]
+      view.render(partial: "attachments/attachments", locals: { entity: entity })
+    end
+
+    insert_after :show_account_bottom do |view, context|
+      entity = context[:entity]
+      view.render(partial: "attachments/attachments", locals: { entity: entity })
+    end
+
+    insert_after :show_lead_bottom do |view, context|
+      entity = context[:entity]
+      view.render(partial: "attachments/attachments", locals: { entity: entity })
+    end
+
+    insert_after :show_opportunity_bottom do |view, context|
+      entity = context[:entity]
+      view.render(partial: "attachments/attachments", locals: { entity: entity })
+    end    
+    
+    #TODO
+    #insert_after :sidebar_files_section do |view, resource|
+    #  view.render(partial: "attachments/sidebar_attachments", locals: { entity: resource })
+    #end
+    
   end
 
 end
