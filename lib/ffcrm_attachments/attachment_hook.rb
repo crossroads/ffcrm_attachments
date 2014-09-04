@@ -1,4 +1,4 @@
-module FfcrmAttachment
+module FfcrmAttachments
 
   class AttachmentHook < FatFreeCRM::Callback::Base
 
@@ -36,13 +36,13 @@ module FfcrmAttachment
     insert_after :show_opportunity_bottom do |view, context|
       entity = context[:entity]
       view.render(partial: "attachments/attachments", locals: { entity: entity })
-    end    
-    
+    end
+
     #TODO
     #insert_after :sidebar_files_section do |view, resource|
     #  view.render(partial: "attachments/sidebar_attachments", locals: { entity: resource })
     #end
-    
+
   end
 
 end
