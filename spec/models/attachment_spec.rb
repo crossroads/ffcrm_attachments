@@ -20,7 +20,7 @@ describe Attachment do
   describe 'instance methods' do
     it 'is_image?' do
       attach = FactoryGirl.create :attachment
-      attach.is_image?.should eq(true)
+      expect(attach.is_image?).to eq(true)
     end
 
     it 'should return preview image path' do

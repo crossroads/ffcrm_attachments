@@ -17,14 +17,9 @@ Gem::Specification.new do |s|
 
   s.test_files = Dir["spec/**/*"]
 
-  s.add_dependency "rails", "~> 3.2.14"
-  #s.add_dependency "fat_free_crm"
+  s.add_dependency "rails"
   s.add_dependency "paperclip"
-  s.add_dependency 'simple_form', '~> 2.0.1'
-  # s.add_dependency "jquery-rails"
-
+  s.add_dependency "simple_form"
   s.add_development_dependency "pg"
-  s.add_development_dependency 'rspec-rails'
-  s.add_development_dependency 'factory_girl_rails'
-  s.add_development_dependency 'ffaker'
+  s.add_development_dependency "rspec-rails"
 end

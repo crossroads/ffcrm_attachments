@@ -15,9 +15,8 @@ gem "jquery-rails"
 
 gem 'aws-sdk'
 gem 'fat_free_crm', github: 'fatfreecrm/fat_free_crm'
+gem 'factory_girl_rails'
 
-# To use debugger
 group :development do
-  gem 'byebug', platform: 'ruby_20'
-  gem 'debugger', platform: 'ruby_19'
+  gem 'byebug' unless ENV['CI']
 end
