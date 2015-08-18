@@ -1,0 +1,14 @@
+sudo: false
+language: ruby
+rvm:
+  - 2.2.2
+  - 2.0.0
+
+cache: bundler
+bundler_args: --path=vendor/bundle --without heroku
+
+before_script:
+  - sh -c "psql -c 'create database ffcrm_attachments_test;' -U postgres"
+  - sh -c "RAILS_ENV=test bundle exec rake db:schema:load"
+
+script: "bundle exec rake"
