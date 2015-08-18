@@ -1,7 +1,8 @@
 sudo: false
 language: ruby
 rvm:
-  - 2.2.1
+  - 2.2.2
+  - 2.0.0
 
 cache: bundler
 bundler_args: --path=vendor/bundle --without heroku
