@@ -19,7 +19,8 @@ class Attachment < ActiveRecord::Base
       styles:         lambda{ |a| a.instance.get_attachment_styles },
       storage:        :s3,
       s3_credentials: Setting.s3_credentials,
-      s3_protocol:    'http'
+      s3_protocol:    'http',
+      s3_host_name:   Setting.s3_host_name
   else
     has_attached_file :attachment,
     styles: lambda{ |a| a.instance.get_attachment_styles }
