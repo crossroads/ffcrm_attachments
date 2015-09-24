@@ -24,7 +24,7 @@ class Attachment < ActiveRecord::Base
       s3_permissions: Setting.s3_permissions
   else
     has_attached_file :attachment,
-    styles: lambda{ |a| a.instance.get_attachment_styles }
+      styles: lambda{ |a| a.instance.get_attachment_styles }
   end
 
   def get_attachment_styles

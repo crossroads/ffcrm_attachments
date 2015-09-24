@@ -11,15 +11,21 @@
       %tr
         %td
           = f.simple_fields_for :attachments do |t|
-            .attach_div
-              - new_record = t.object.new_record?
+            - new_record = t.object.new_record?
 
-              = t.file_field 'attachment', id: 'attach'
+            .attach_div{class: new_record ? "new" : "persistent"}
+
+              = t.file_field 'attachment', id: 'attach', class: new_record ? "" : "hidden"
 
               .current_file_name= t.object.try(:attachment_file_name)
 
               .file_size= number_to_human_size(t.object.try(:attachment_file_size)) unless new_record
 
-              .remove_link{class: new_record ? "" : "display_remove"}= link_to 'Remove', '#', confirm: new_record ? false : "Are you sure want to delete this attachment?"
+              - unless new_record
+                .replace_link
+                  = link_to t(:extra_doc_replace), '#'
 
-          .next_attachment
+              .remove_link{class: new_record ? "hidden" : "display_remove"}
+                = link_to t(:extra_doc_remove), '#', confirm: new_record ? false : t(:extra_doc_remove_confirm)
+
+          .next_attachment{data: {remove_text: t(:extra_doc_remove)}}

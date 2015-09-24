@@ -1,3 +1,6 @@
 ---
 en-US:
   extra_doc: Documents
+  extra_doc_replace: Replace
+  extra_doc_remove: Remove
+  extra_doc_remove_confirm: Are you sure want to delete this attachment?

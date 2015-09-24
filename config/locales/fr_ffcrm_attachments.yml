@@ -1,3 +1,6 @@
 ---
 fr:
   extra_doc: Fichers
+  extra_doc_replace: Remplacer
+  extra_doc_remove: Supprimer
+  extra_doc_remove_confirm: Êtes-vous sûr de vouloir supprimer ce fichier ?
