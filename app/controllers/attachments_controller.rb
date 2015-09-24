@@ -4,8 +4,10 @@ class AttachmentsController < ApplicationController
     attach = Attachment.find(params[:id])
 
     if Setting.storage_at_s3
-      data = open attach.attachment.url(:original)
-      send_data data.read, type: attach.attachment.content_type, disposition: 'inline'
+      redirect_to attach.attachment.s3_object.url_for(:read, {
+        expires: 10.minutes,
+        response_content_disposition: 'attachment'
+      }).to_s
     else
       send_file attach.attachment.path(:original), disposition: 'attachment'
     end

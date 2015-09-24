@@ -1,6 +1,6 @@
 module AttachmentHelper
   def attachment_icon(attachment)
-    attachment.is_image? ? attachment.attachment.url(:medium) :
+    attachment.is_image? ? attachment.attachment.expiring_url(10.minutes, :medium) :
       attachment.to_default_image
   end
 

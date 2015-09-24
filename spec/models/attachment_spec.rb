@@ -25,7 +25,7 @@ describe Attachment do
 
     it 'should return preview image path' do
       attach = FactoryGirl.create :doc_attachment
-      expect( attach.to_default_image ).to eq("/assets/ffcrm_attachments/default-doc.png")
+      expect( attach.to_default_image ).to eq("ffcrm_attachments/default-doc.png")
     end
   end
 end

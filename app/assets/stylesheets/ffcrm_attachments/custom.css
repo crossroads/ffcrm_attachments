@@ -15,9 +15,14 @@
   margin-bottom: 2%;
 }
 
-#attach {
-  width: 17% !important;
-  display: inline;
+#attach,
+.current_file_name,
+.file_size,
+.replace_link,
+.display_remove,
+.remove_link {
+  display: inline-block;
+  vertical-align: middle;
 }
 
 .attach_div {
@@ -26,32 +31,18 @@
 }
 
 .file_size {
-  display: inline-block;
   font-size: 13px;
-  line-height: 22px;
-  margin-left: 58%;
-  vertical-align: bottom;
+  margin-left: 10px;
 }
 
 .current_file_name {
-  display: inline;
-  position: absolute;
   font-size: 13px;
   margin-left: 10px;
-  margin-top: 8px;
-  width: 27%;
 }
 
-.remove_link {
-  float: right;
-  display: none;
+.replace_link, .remove_link {
   font-size: 13px;
   margin-left: 10px;
-  margin-top: 8px;
-}
-
-.display_remove {
-  display: inline;
 }
 
 .section #entity_extra table {
@@ -60,4 +51,12 @@
 
 .error {
   color: red;
+}
+
+.attach_div.new .current_file_name {
+  display: none !important;
+}
+
+.hidden {
+  display: none !important;
 }

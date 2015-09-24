@@ -25,7 +25,7 @@ $(document).on('change', "#attach", function (){
     parent_div.find('.current_file_name').addClass('error').html(error_msg);
     $(this).val('');
     parent_div.find(".file_size").html('');
-    parent_div.find(".remove_link").hide();
+    parent_div.find(".remove_link").addClass('hidden');
   } else {
     var last_file_input = $("#entity_extra").find('input').last()[0].files;
 
@@ -41,7 +41,7 @@ $(document).on('change', "#attach", function (){
     parent_div.find(".file_size").html(file_size);
 
     // display remove attachment link
-    parent_div.find(".remove_link").show();
+    parent_div.find(".remove_link").removeClass('hidden');
   }
 });
 
@@ -54,6 +54,15 @@ $(document).on('click', ".remove_link", function(){
 
   // old attachment
   destroy_attachment(current_file_div, $this);
+
+  return false;
+});
+
+$(document).on('click', ".replace_link", function(){
+  var $this = $(this);
+  current_file_div = $this.closest(".attach_div");
+  current_file_div.find("#attach").removeClass('hidden');
+  $this.remove();
 
   return false;
 });
@@ -104,9 +113,10 @@ function file_size_in_bytes(limit_size) {
 function get_file_input(file_attr_name) {
   file_name_div = "<div class='current_file_name'></div>";
   file_size_div = "<div class='file_size'></div>";
-  remove_link_div = "<div class='remove_link'><a href='#'>Remove</a></div>";
+  remove_link_text = $(".next_attachment").data('remove-text');
+  remove_link_div = "<div class='remove_link hidden'><a href='#'>" + remove_link_text + "</a></div>";
   file_input_div = "<input id='attach' name='"+file_attr_name+"' type='file'>";
-  complete_div = "<div class='attach_div'>" + file_input_div + file_name_div +
+  complete_div = "<div class='attach_div new'>" + file_input_div + file_name_div +
     file_size_div + remove_link_div + "</div>";
   return complete_div;
 }

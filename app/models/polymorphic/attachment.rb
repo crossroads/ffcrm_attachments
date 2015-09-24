@@ -19,10 +19,12 @@ class Attachment < ActiveRecord::Base
       styles:         lambda{ |a| a.instance.get_attachment_styles },
       storage:        :s3,
       s3_credentials: Setting.s3_credentials,
-      s3_protocol:    'http'
+      s3_host_name:   Setting.s3_host_name,
+      s3_protocol:    Setting.s3_protocol,
+      s3_permissions: Setting.s3_permissions
   else
     has_attached_file :attachment,
-    styles: lambda{ |a| a.instance.get_attachment_styles }
+      styles: lambda{ |a| a.instance.get_attachment_styles }
   end
 
   def get_attachment_styles
@@ -33,7 +35,7 @@ class Attachment < ActiveRecord::Base
     default = "default-document.jpg"
     matches = Regexp.new(/\.(doc|pdf|ppt|xls)/).match(self.attachment_file_name)
     default = "default-#{matches[1]}.png" if matches
-    "/assets/ffcrm_attachments/#{default}"
+    "ffcrm_attachments/#{default}"
   end
 
   def is_image?
