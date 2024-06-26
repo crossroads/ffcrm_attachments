@@ -1,6 +1,6 @@
-include ActionDispatch::TestProcess
+include ActionDispatch::TestProcess::FixtureFile
 
-FactoryGirl.define do
+FactoryBot.define do
 
   factory :attachment do
     attachment { fixture_file_upload(

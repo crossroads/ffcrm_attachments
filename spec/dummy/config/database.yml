@@ -1,8 +1,9 @@
 development: &development
+  host: localhost
   adapter: postgresql
   database: ffcrm_attachments_development
-  username:
-  password:
+  username: postgres
+  password: postgres
   schema_search_path: public
   min_messages: warning
 

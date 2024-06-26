@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe ContactsController, type: :controller do
 
@@ -9,8 +9,8 @@ describe ContactsController, type: :controller do
     end
 
     pending 'should add attachment with contact' do
-      contact = FactoryGirl.build :contact
-      attachment = FactoryGirl.build :attachment
+      contact = FactoryBot.build :contact
+      attachment = FactoryBot.build :attachment
       contact.attachments << attachment
       allow(Contact).to receive(:new).and_return(contact)
       contact_params = { "first_name"=>"test", "last_name"=>"test",

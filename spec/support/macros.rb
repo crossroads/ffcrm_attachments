@@ -10,11 +10,11 @@ end
 #----------------------------------------------------------------------------
 def stub_task(view)
   if view == "completed"
-    assigns[:task] = FactoryGirl.create(:task, completed_at: Time.now - 1.minute)
+    assigns[:task] = FactoryBot.create(:task, completed_at: Time.now - 1.minute)
   elsif view == "assigned"
-    assigns[:task] = FactoryGirl.create(:task, assignee: FactoryGirl.create(:user))
+    assigns[:task] = FactoryBot.create(:task, assignee: FactoryBot.create(:user))
   else
-    assigns[:task] = FactoryGirl.create(:task)
+    assigns[:task] = FactoryBot.create(:task)
   end
 end
 

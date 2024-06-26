@@ -10,24 +10,24 @@ class Attachment < ActiveRecord::Base
   STYLES = { medium: "150x150>" }
 
   belongs_to :user
-  belongs_to :entity, :polymorphic => true
+  belongs_to :entity, polymorphic: true
 
-  do_not_validate_attachment_file_type :attachment
+  # do_not_validate_attachment_file_type :attachment # OLD used in PaperClip
 
-  if Rails.env != 'test' && Setting.storage_at_s3
-    has_attached_file :attachment,
-      styles:         lambda{ |a| a.instance.get_attachment_styles },
-      storage:        :s3,
-      s3_credentials: Setting.s3_credentials,
-      s3_protocol:    'http'
-  else
-    has_attached_file :attachment,
-    styles: lambda{ |a| a.instance.get_attachment_styles }
-  end
+  # if Rails.env != 'test' && Setting.storage_at_s3
+  #   has_attached_file :attachment,
+  #     styles:         lambda{ |a| a.instance.get_attachment_styles },
+  #     storage:        :s3,
+  #     s3_credentials: Setting.s3_credentials,
+  #     s3_protocol:    'http'
+  # else
+  #   has_attached_file :attachment,
+  #   styles: lambda{ |a| a.instance.get_attachment_styles }
+  # end
 
-  def get_attachment_styles
-    ATTACHMENT_FORMATS.include?(attachment.content_type) ? STYLES : {}
-  end
+  # def get_attachment_styles
+  #   ATTACHMENT_FORMATS.include?(attachment.content_type) ? STYLES : {}
+  # end
 
   def to_default_image
     default = "default-document.jpg"

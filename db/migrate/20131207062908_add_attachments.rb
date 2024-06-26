@@ -1,4 +1,4 @@
-class AddAttachments < ActiveRecord::Migration
+class AddAttachments < ActiveRecord::Migration[4.2]
   def self.up
     create_table :attachments, :force => true do |t|
       t.references  :entity, :polymorphic => true

@@ -7,7 +7,7 @@ require "ffcrm_attachments/version"
 Gem::Specification.new do |s|
   s.name        = "ffcrm_attachments"
   s.version     = FfcrmAttachments::VERSION
-  s.authors     = ["Simon Pang"]
+  s.authors     = ["Stephen Kenworthy", "Simon Pang"]
   s.email       = [""]
   s.homepage    = "https://github.com/simonpang/ffcrm_attachments"
   s.summary     = "Summary of FfcrmAttachments."
@@ -18,8 +18,11 @@ Gem::Specification.new do |s|
   s.test_files = Dir["spec/**/*"]
 
   s.add_dependency "rails"
-  s.add_dependency "paperclip"
-  s.add_dependency "simple_form"
+  s.add_dependency "fat_free_crm"
+  # s.add_dependency "paperclip"
+
   s.add_development_dependency "pg"
   s.add_development_dependency "rspec-rails"
+  s.add_development_dependency "factory_bot_rails"
+  s.add_development_dependency "listen"
 end
