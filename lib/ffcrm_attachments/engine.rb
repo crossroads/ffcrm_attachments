@@ -9,9 +9,12 @@ module FfcrmAttachments
 
         ENTITIES.each do |entity|
           entity.safe_constantize.class_eval do
-            has_many :attachments, as: :entity, dependent: :destroy
-            accepts_nested_attributes_for :attachments,
-              allow_destroy: true, reject_if: lambda { |l| l[:attachment].blank? }
+            # Paperclip
+            # has_many :attachments, as: :entity, dependent: :destroy
+
+            # Active Storage
+            has_many_attached :attachments, dependent: :destroy #, allow_destroy: true, reject_if: lambda { |l| l[:attachment].blank? }
+            # accepts_nested_attributes_for :attachments
           end
         end
 

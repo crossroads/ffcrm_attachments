@@ -54,6 +54,14 @@ Run ```rake``` to setup the database and run the specs.
 
 Please open issues in the GitHub issue tracker and use pull requests for new features.
 
+## Conversion from PaperClip to ActiveStorage
+
+Please run this in the Rails console
+```
+require "ffcrm_attachments/convert_to_active_storage"
+FfcrmAttachments::ConvertToActiveStorage.new.process!
+```
+
 ## License
 
 Copyright Crossroads Foundation 2014

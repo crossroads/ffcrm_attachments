@@ -1,8 +1,7 @@
 - attach_limit_size = Setting.attachment_size || 2.megabytes
 - edit = !f.object.new_record?
 - collapsed = session[:entity_extra].nil?
-- entity.attachments.build
-
+-# entity.attachments.build
 = subtitle :entity_extra, collapsed, t(:extra_doc)
 
 .section
@@ -10,16 +9,30 @@
     %table{class: edit ? "edit_form" : "", 'attach_limit' => attach_limit_size }
       %tr
         %td
-          = f.simple_fields_for :attachments do |t|
-            .attach_div
-              - new_record = t.object.new_record?
+          %input{name: "authenticity_token", value: form_authenticity_token, type: "hidden"}
+          = f.object.attachments.each do |attachment|
+            = f.hidden_field :attachments, multiple: true, value: attachment.signed_id 
+            = link_to attachment.filename, rails_blob_path(attachment, disposition: "attachment")
+            -# delete button
 
-              = t.file_field 'attachment', id: 'attach'
+          -# upload more files    
+          -# = f.simple_fields_for :attachments do |t|
+          -# TODO: The line below is printing weird text
+          = f.file_field 'attachments', id: 'attach', multiple: true
 
-              .current_file_name= t.object.try(:attachment_file_name)
 
-              .file_size= number_to_human_size(t.object.try(:attachment_file_size)) unless new_record
+          -# = f.simple_fields_for :attachments do |t|
+            -# .attach_div
+              -# %input{name: "authenticity_token", value: form_authenticity_token, type: "hidden"}
 
-              .remove_link{class: new_record ? "" : "display_remove"}= link_to 'Remove', '#', confirm: new_record ? false : "Are you sure want to delete this attachment?"
+              -# - new_record = t.object.new_record?
 
-          .next_attachment
+              -# = f.file_field 'attachments', id: 'attach', multiple: true
+
+              -# .current_file_name= t.object.try(:attachment_file_name)
+
+              -# .file_size= number_to_human_size(t.object.try(:attachment_file_size)) unless new_record
+
+              -# .remove_link{class: new_record ? "" : "display_remove"}= link_to 'Remove', '#', confirm: new_record ? false : "Are you sure want to delete this attachment?"
+
+          -# .next_attachment

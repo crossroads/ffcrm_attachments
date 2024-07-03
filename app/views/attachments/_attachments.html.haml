@@ -7,8 +7,7 @@
       %table
         %tr
           %td
-            - if entity.attachments.present?
-              - entity.attachments.each do |attach|
-                .attach_block
-                  = link_to attachment_preview(attach), download_attachment_path(attach), {title: attach.attachment_file_name}
-                  .file_name= file_name(attach)
+          - if entity.attachments.present? #revert to below as ajax refresh won't show new docs if put up top
+            - entity.attachments.each do |attach|
+              .attach_block
+                = link_to attach.filename, rails_blob_path(attach, disposition: "attachment")
