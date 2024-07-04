@@ -1,4 +1,4 @@
-- attach_limit_size = Setting.attachment_size || 2.megabytes
+- attach_limit_size = Setting.attachment_size || 20.megabytes
 - edit = !f.object.new_record?
 - collapsed = session[:entity_extra].nil?
 -# entity.attachments.build
@@ -10,15 +10,18 @@
       %tr
         %td
           %input{name: "authenticity_token", value: form_authenticity_token, type: "hidden"}
-          = f.object.attachments.each do |attachment|
-            = f.hidden_field :attachments, multiple: true, value: attachment.signed_id 
-            = link_to attachment.filename, rails_blob_path(attachment, disposition: "attachment")
-            -# delete button
+          - if f.object.attachments.any?
+            %ul
+              - f.object.attachments.each do |attachment|
+                %li
+                  = f.hidden_field :attachments, multiple: true, value: attachment.signed_id
+                  = link_to attachment.filename, rails_blob_path(attachment, disposition: "attachment")
+                  = link_to 'Remove', '#', confirm: "Are you sure want to delete this attachment?", class: "remove_link"
 
-          -# upload more files    
-          -# = f.simple_fields_for :attachments do |t|
-          -# TODO: The line below is printing weird text
-          = f.file_field 'attachments', id: 'attach', multiple: true
+          -# upload more files
+          .new_file
+            = f.file_field 'attachments', id: 'attach', multiple: true
+            .error_msg
 
 
           -# = f.simple_fields_for :attachments do |t|

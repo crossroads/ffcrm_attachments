@@ -3,22 +3,25 @@ module FfcrmAttachments
 
     config.to_prepare do
       require "polymorphic/attachment"
+
+      # view hooks
       require "ffcrm_attachments/attachment_hook"
 
-      ActiveSupport.on_load(:fat_free_crm_attachment) do
+      # add attachments to Contacts, Accounts etc
+      ENTITIES.each do |entity|
+        entity.safe_constantize.class_eval do
+          has_many_attached :attachments, dependent: :destroy
+          validate :attachment_file_sizes
 
-        ENTITIES.each do |entity|
-          entity.safe_constantize.class_eval do
-            # Paperclip
-            # has_many :attachments, as: :entity, dependent: :destroy
-
-            # Active Storage
-            has_many_attached :attachments, dependent: :destroy #, allow_destroy: true, reject_if: lambda { |l| l[:attachment].blank? }
-            # accepts_nested_attributes_for :attachments
+          def attachment_file_sizes
+            unless attachments.collect{|f| f.blob.byte_size < 20.megabytes}.all?
+              errors.add(:attachments, 'file size is too big')
+            end
           end
-        end
 
+        end
       end
+
     end
 
     config.generators do |g|

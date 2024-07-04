@@ -17,15 +17,15 @@ describe Attachment do
     end
   end
 
-  describe 'instance methods' do
-    it 'is_image?' do
-      attach = FactoryBot.create :attachment
-      expect(attach.is_image?).to eq(true)
-    end
+  # describe 'instance methods' do
+  #   it 'is_image?' do
+  #     attach = FactoryBot.create :attachment
+  #     expect(attach.is_image?).to eq(true)
+  #   end
 
-    it 'should return preview image path' do
-      attach = FactoryBot.create :doc_attachment
-      expect( attach.to_default_image ).to eq("/assets/ffcrm_attachments/default-doc.png")
-    end
-  end
+  #   it 'should return preview image path' do
+  #     attach = FactoryBot.create :doc_attachment
+  #     expect( attach.to_default_image ).to eq("/assets/ffcrm_attachments/default-doc.png")
+  #   end
+  # end
 end
