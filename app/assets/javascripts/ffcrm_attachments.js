@@ -1854,12 +1854,11 @@ defer(function() {
 
     $(document).on('change', "#attach", function (){
     var parent_div = $(this).closest(".new_file");
-    var attach_limit = $(parent_div.closest('table')[0]).attr("attach_limit");
-    var attach_limit_size = file_size_in_bytes(attach_limit);
+    var attach_limit_size = $(parent_div.closest('table')[0]).attr("attach_limit");
     var file_type = this.files[0].type;
 
     if((file_type == "") || (this.files[0].size > attach_limit_size)) {
-        error_msg = (file_type == "") ? "Invalid file type" : "File size is too big. Limit: ";// + get_file_size(attach_limit_size) + " Your File: " + get_file_size(this.files[0].size);
+        error_msg = (file_type == "") ? "Invalid file type" : "File size is too big. Max allowed: " + formatBytes(attach_limit_size) + " Your File: " + formatBytes(this.files[0].size);
         parent_div.find('.error_msg').addClass('error').html(error_msg);
         $(this).val('');
         parent_div.find(".remove_link").hide();
@@ -1883,66 +1882,15 @@ defer(function() {
       return false;
     });
 
-    // function destroy_attachment(current_file_div, current_obj) {
-    // edit_form = current_obj.closest('table').hasClass('edit_form');
-    // old_attachment = current_obj.hasClass('display_remove');
-
-    // if(edit_form && old_attachment) {
-    //     var attach_id = $(current_file_div.next('input')[0]).val();
-    //     $.ajax({
-    //     url: "/attachments/"+attach_id+"/remove",
-    //     data: {
-    //         id: attach_id
-    //     },
-    //     type: 'PUT'
-    //     });
-    //     $(current_file_div.next('input')[0]).val('');
-    // }
-    // }
-
-    function get_file_size(file) {
-    var fSExt = new Array('Bytes', 'KB', 'MB', 'GB');
-    fSize = file.size;
-    i = 0;
-    while(fSize > 900){
-        fSize /= 1024;
-        i++;
-    }
-    value = (Math.round(fSize*100)/100) + ' ' + fSExt[i];
-    return value;
-    }
-
-    function file_size_in_bytes(limit_size) {
-    var size_arr = limit_size.split(' ');
-    var fSExt = new Array('Bytes', 'KB', 'MB', 'GB');
-    index = $.inArray(size_arr[1], fSExt);
-    multiplier = 1;
-    i = 1;
-    while(i<=index){
-        multiplier = multiplier * 1024;
-        i++;
-    }
-    value = size_arr[0] * multiplier;
-    return value;
-    }
-
-    // function get_file_input(file_attr_name) {
-    // file_name_div = "<div class='current_file_name'></div>";
-    // file_size_div = "<div class='file_size'></div>";
-    // remove_link_div = "<div class='remove_link'><a href='#'>Remove</a></div>";
-    // file_input_div = "<input id='attach' name='"+file_attr_name+"' type='file'>";
-    // complete_div = "<div class='attach_div'>" + file_input_div + file_name_div +
-    //     file_size_div + remove_link_div + "</div>";
-    // return complete_div;
-    // }
-
-    // function append_file_input(last_file_input) {
-    // if(last_file_input.length > 0) {
-    //     var input_length = $("#entity_extra").find('input:file').length;
-    //     var attr_name = $("input#attach").attr('name');
-    //     var set_attr_name = attr_name.replace("[0]", "["+input_length+"]");
-    //     var next_attach_input = get_file_input(set_attr_name);
-    //     $(".next_attachment").append(next_attach_input);
-    // }
-    // }
+    function formatBytes(bytes) {
+        if (bytes < 1024) {
+          return bytes + " B";
+        } else if (bytes < 1024 * 1024) {
+          return (bytes / 1024).toFixed(2) + " KB";
+        } else if (bytes < 1024 * 1024 * 1024) {
+          return (bytes / (1024 * 1024)).toFixed(2) + " MB";
+        } else {
+          return (bytes / (1024 * 1024 * 1024)).toFixed(2) + " GB";
+        }
+      }
 });

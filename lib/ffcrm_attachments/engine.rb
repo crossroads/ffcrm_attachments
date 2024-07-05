@@ -2,13 +2,11 @@ module FfcrmAttachments
   class Engine < ::Rails::Engine
 
     config.to_prepare do
-      require "polymorphic/attachment"
+      # require "polymorphic/attachment"
+      require "ffcrm_attachments/config"
 
       # view hooks
       require "ffcrm_attachments/attachment_hook"
-
-      # Set attachment limit to 20MB if config/settings.default.yml isn't set
-      Setting.attachment_size ||= 20.megabytes
 
       # add attachments to Contacts, Accounts etc
       ENTITIES.each do |entity|
@@ -17,9 +15,8 @@ module FfcrmAttachments
           validate :attachment_file_sizes
 
           def attachment_file_sizes
-            # TODO Size
-            unless attachments.collect{|f| f.blob.byte_size < Setting.attachment_size}.all?
-              errors.add(:attachments, 'file size is too big')
+            unless attachments.collect{|f| f.blob.byte_size < FfcrmAttachments::Config.attachment_size}.all?
+              errors.add(:attachments, "File size is too big. Max size (per file): #{ActiveSupport::NumberHelper.number_to_human_size(FfcrmAttachments::Config.attachment_size)}")
             end
           end
 
