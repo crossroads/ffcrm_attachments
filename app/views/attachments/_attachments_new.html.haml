@@ -15,9 +15,9 @@
                 %li
                   = f.hidden_field :attachments, multiple: true, value: attachment.signed_id
                   = link_to attachment.filename, rails_blob_path(attachment, disposition: "attachment")
-                  = link_to 'Remove', '#', confirm: "Are you sure want to delete this attachment?", class: "remove_link"
-
-          -# upload more files
+                  = link_to '#', :data => {:confirm => 'Are you sure want to delete this attachment?'} , class: "remove_link", title: "Remove attachment" do
+                    -# Font Awesome v4
+                    %i.fa.fa-times-circle
           .new_file
             = f.file_field 'attachments', id: 'attach', multiple: true
             .error_msg
