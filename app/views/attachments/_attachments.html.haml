@@ -11,4 +11,4 @@
             %ul
               - entity.attachments.each do |attach|
                 %li
-                  = link_to attach.filename, rails_blob_path(attach, disposition: "attachment")
+                  = link_to "#{attach.filename} #{number_to_human_size(attach.byte_size)}", rails_blob_path(attach, disposition: "attachment")
