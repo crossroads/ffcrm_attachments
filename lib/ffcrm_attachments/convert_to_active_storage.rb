@@ -52,6 +52,8 @@ module FfcrmAttachments
             next
           end
 
+          attachments = ["attachment"]
+
           model.find_each.each do |instance|
             attachments.each do |attachment|
               if instance.send(attachment).path.blank?

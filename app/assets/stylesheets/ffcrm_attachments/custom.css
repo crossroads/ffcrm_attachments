@@ -16,7 +16,8 @@
 } */
 
 #attach {
-  width: 17% !important;
+  /* width: 17% !important; */
+  width: 100% !important;
   display: inline;
 }
 

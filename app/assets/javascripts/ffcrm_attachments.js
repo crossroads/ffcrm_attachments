@@ -1853,28 +1853,20 @@ defer(function() {
     });
 
     $(document).on('change', "#attach", function (){
-    var parent_div = $(this).closest(".new_file");
-    var attach_limit_size = $(parent_div.closest('table')[0]).attr("attach_limit");
-    var file_type = this.files[0].type;
-
-    if((file_type == "") || (this.files[0].size > attach_limit_size)) {
-        error_msg = (file_type == "") ? "Invalid file type" : "File size is too big. Max allowed: " + formatBytes(attach_limit_size) + " Your File: " + formatBytes(this.files[0].size);
-        parent_div.find('.error_msg').addClass('error').html(error_msg);
-        $(this).val('');
-        parent_div.find(".remove_link").hide();
-    } else {
-        var last_file_input = $("#entity_extra").find('input').last()[0].files;
-
-        // append file input
-        append_file_input(last_file_input);
-
-        // display attachment-name
-        var file_name = this.files[0].name;
-        parent_div.find('.error_msg').removeClass("error").html(file_name);
-
-        // display remove attachment link
-        parent_div.find(".remove_link").show();
-    }
+        var parent_div = $(this).closest(".new_file");
+        parent_div.find('.error_msg').html("");
+        var attach_limit_size = $(parent_div.closest('table')[0]).attr("attach_limit");
+        
+        for (const file of Array.from(this.files)) {
+            if((file.type == "") || (file.size > attach_limit_size)) {
+                error_msg = (file.type == "") ? "Invalid file type" : "File size of "+ file.name +" is too big. <br> Please select your file(s) again. <br> Max allowed: " + formatBytes(attach_limit_size) + " Your File: " + formatBytes(file.size);
+                parent_div.find('.error_msg').addClass('error').html(error_msg);
+                $(this).val('');
+                break;
+            } else {
+                parent_div.find('.error_msg').removeClass("error").append(file.name + "<br>");
+            }
+        };
     });
 
     $(document).on('click', ".remove_link", function() {
@@ -1884,13 +1876,13 @@ defer(function() {
 
     function formatBytes(bytes) {
         if (bytes < 1024) {
-          return bytes + " B";
+            return bytes + " B";
         } else if (bytes < 1024 * 1024) {
-          return (bytes / 1024).toFixed(2) + " KB";
+            return (bytes / 1024).toFixed(2) + " KB";
         } else if (bytes < 1024 * 1024 * 1024) {
-          return (bytes / (1024 * 1024)).toFixed(2) + " MB";
+            return (bytes / (1024 * 1024)).toFixed(2) + " MB";
         } else {
-          return (bytes / (1024 * 1024 * 1024)).toFixed(2) + " GB";
-        }
-      }
+            return (bytes / (1024 * 1024 * 1024)).toFixed(2) + " GB";
+        }
+    }
 });
