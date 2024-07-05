@@ -24,7 +24,7 @@ bundle exec rake db:migrate
 
 ## TODO / NOT YET IMPLEMENTED
 
-* Implement maximum file upload size validation
+<!-- * Implement maximum file upload size validation -->
 * Virus validation
 * Add javascript to provide 'drag and drop' file capability when editting an entity
 * Implement security for the File class - it should be able to do whatever the parent class allows. (I.e. if you are allowed to see a contact, then you are allowed to download the attached file.)

@@ -1859,7 +1859,7 @@ defer(function() {
     var file_type = this.files[0].type;
 
     if((file_type == "") || (this.files[0].size > attach_limit_size)) {
-        error_msg = (file_type == "") ? "Invalid file type" : "File size is too big.";
+        error_msg = (file_type == "") ? "Invalid file type" : "File size is too big. Limit: ";// + get_file_size(attach_limit_size) + " Your File: " + get_file_size(this.files[0].size);
         parent_div.find('.error_msg').addClass('error').html(error_msg);
         $(this).val('');
         parent_div.find(".remove_link").hide();

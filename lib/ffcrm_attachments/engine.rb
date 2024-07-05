@@ -7,6 +7,9 @@ module FfcrmAttachments
       # view hooks
       require "ffcrm_attachments/attachment_hook"
 
+      # Set attachment limit to 20MB if config/settings.default.yml isn't set
+      Setting.attachment_size ||= 20.megabytes
+
       # add attachments to Contacts, Accounts etc
       ENTITIES.each do |entity|
         entity.safe_constantize.class_eval do
@@ -14,7 +17,8 @@ module FfcrmAttachments
           validate :attachment_file_sizes
 
           def attachment_file_sizes
-            unless attachments.collect{|f| f.blob.byte_size < 20.megabytes}.all?
+            # TODO Size
+            unless attachments.collect{|f| f.blob.byte_size < Setting.attachment_size}.all?
               errors.add(:attachments, 'file size is too big')
             end
           end
