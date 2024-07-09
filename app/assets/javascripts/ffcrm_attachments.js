@@ -1838,7 +1838,7 @@ defer(function() {
     /* -------------------------------------------------------------------------- */
     $('#main form[class^=new_], #main form[class^=edit_]').ajaxForm();
 
-    $(document).on("click", "#main form[class^=new_] input[type=submit], form.edit_contact input[type=submit]", function(event) { //#main form[class^=edit_] input[type=submit]
+    $(document).on("click", "#main form[class*=new_] input[type=submit], #main form[class*=edit_] input[type=submit]", function(event) {
     $form = $(event.target).closest('form');
     $form.ajaxSubmit({
         clearForm: true,
@@ -1864,7 +1864,7 @@ defer(function() {
                 $(this).val('');
                 break;
             } else {
-                parent_div.find('.error_msg').removeClass("error").append(file.name + "<br>");
+                parent_div.find('.error_msg').removeClass("error").append(file.name+" "+ formatBytes(file.size) +"<br>");
             }
         };
     });
