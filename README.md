@@ -10,12 +10,7 @@ _Pre-requisites: you'll need to have a Fat Free CRM instance up and running._
 gem 'ffcrm_attachments', github: 'crossroads/ffcrm_attachments', branch: 'master'
 ```
 
-* Then migrate your database to get the new Attachments table
-```ruby
-bundle exec rake db:migrate
-```
-
-* Add default settings for attachments as: (In your config/settings.default.yml)
+* Add default settings for attachments as: (In your config/settings.default.yml) (note: if not specified, default is 20MB.)
 ```ruby
 :attachment_size: '5 MB'
 ```
@@ -40,7 +35,6 @@ git clone https://github.com/crossroads/ffcrm_attachments.git
 ```ruby
 bundle config local.ffcrm_attachments /path/to/ffcrm_attachments
 ```
-
 Read more at http://ryanbigg.com/2013/08/bundler-local-paths/ and http://bundler.io/v1.3/git.html
 
 Note: you will need a recent version of bundler to do this.
