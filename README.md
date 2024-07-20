@@ -24,7 +24,6 @@ bundle exec rake db:migrate
 
 ## TODO / NOT YET IMPLEMENTED
 
-<!-- * Implement maximum file upload size validation -->
 * Virus validation
 * Add javascript to provide 'drag and drop' file capability when editting an entity
 * Implement security for the File class - it should be able to do whatever the parent class allows. (I.e. if you are allowed to see a contact, then you are allowed to download the attached file.)
@@ -56,6 +55,10 @@ Please open issues in the GitHub issue tracker and use pull requests for new fea
 
 ## Conversion from PaperClip to ActiveStorage
 
+`master` branch is now converted to ActiveStorage
+
+If you are still using PaperClip and older versions of FFCRM, use the `rails3` branch.
+
 Please run this in the Rails console
 ```
 require "ffcrm_attachments/convert_to_active_storage"
@@ -64,7 +67,7 @@ FfcrmAttachments::ConvertToActiveStorage.new.process!
 
 ## License
 
-Copyright Crossroads Foundation 2014
+Copyright Crossroads Foundation
 
 This is "Charityware" i.e. you can use and copy it as much as you like,
 but you are encouraged to make a donation for those in need via the
@@ -74,7 +77,8 @@ Crossroads Foundation (the organisation who built this plugin). See http://www.c
 
 This plugin was developed during the 'Rails Guns - Crossroads Charity Hackathon' event (Dec 2013) and we gratefully acknowledge work from the following 'rails guns':
 
-* Steve Kenworthy (@steveyken) - developer @ Crossroads Foundation
+* Steve Kenworthy (@steveyken) - maintainer
 * Simon Pang (@simonpang)
 * Swati Jadhav (@swatijadhav)
+* Stanley Hansen (@stanleylhs) - ActiveStorage upgrade in 2024
 
