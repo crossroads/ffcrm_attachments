@@ -1,63 +1,8 @@
-.file_icon {
-  display: inline-block;
-  margin: 5% 2% 0;
-  width: 55px;
-}
-
-.file_name {
-  display: block;
-  font-weight: bold;
-  margin-top: 2%;
-}
-
-.attach_block {
-  display: inline-block;
-  margin-bottom: 2%;
-}
-
 #attach {
-  width: 17% !important;
-  display: inline;
-}
-
-.attach_div {
-  width: 500px;
-  display: block;
-}
-
-.file_size {
-  display: inline-block;
-  font-size: 13px;
-  line-height: 22px;
-  margin-left: 58%;
-  vertical-align: bottom;
-}
-
-.current_file_name {
-  display: inline;
-  position: absolute;
-  font-size: 13px;
-  margin-left: 10px;
-  margin-top: 8px;
-  width: 27%;
-}
-
-.remove_link {
-  float: right;
-  display: none;
-  font-size: 13px;
-  margin-left: 10px;
-  margin-top: 8px;
-}
-
-.display_remove {
+  width: 100% !important;
   display: inline;
 }
 
 .section #entity_extra table {
   width: 100%;
-}
-
-.error {
-  color: red;
 }

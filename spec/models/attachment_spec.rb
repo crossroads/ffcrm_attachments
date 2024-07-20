@@ -1,31 +1,22 @@
-require 'spec_helper'
+require 'rails_helper'
 
-describe Attachment do
-
+describe "Attachment" do
   describe 'associations' do
-    it 'entity-attahment relation' do
-      contact = FactoryGirl.create :contact
-      attach = FactoryGirl.create :attachment, entity: contact
-
-      expect( contact.attachments.count ).to eq(1)
-    end
-
-    it 'dependent destroy' do
-      contact = FactoryGirl.create :contact
-      attachments = FactoryGirl.create_list :attachment, 3, entity: contact
-      expect { contact.destroy }.to change(Attachment, :count).by(-3)
-    end
+    it { expect(Contact.new.respond_to?('attachments')).to eql(true) }
+    it { expect(Account.new.respond_to?('attachments')).to eql(true) }
+    it { expect(Opportunity.new.respond_to?('attachments')).to eql(true) }
+    it { expect(Campaign.new.respond_to?('attachments')).to eql(true) }
   end
-
-  describe 'instance methods' do
-    it 'is_image?' do
-      attach = FactoryGirl.create :attachment
-      attach.is_image?.should eq(true)
-    end
-
-    it 'should return preview image path' do
-      attach = FactoryGirl.create :doc_attachment
-      expect( attach.to_default_image ).to eq("/assets/ffcrm_attachments/default-doc.png")
+  describe 'validations' do
+    subject { FactoryBot.create(:contact) }
+    it do
+      subject.attachments.attach(
+        io: File.open(File.join('.', 'spec', 'files', 'image.jpg')),
+        filename: 'image.jpg',
+        content_type: 'image/jpeg'
+      )
+      expect(subject.attachments.size).to eql(1)
+      expect(subject).to be_valid
     end
   end
 end
