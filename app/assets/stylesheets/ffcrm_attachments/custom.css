@@ -10,13 +10,14 @@
   margin-top: 2%;
 }
 
-.attach_block {
+/* .attach_block {
   display: inline-block;
   margin-bottom: 2%;
-}
+} */
 
 #attach {
-  width: 17% !important;
+  /* width: 17% !important; */
+  width: 100% !important;
   display: inline;
 }
 
@@ -43,15 +44,15 @@
 }
 
 .remove_link {
-  float: right;
-  display: none;
-  font-size: 13px;
-  margin-left: 10px;
-  margin-top: 8px;
+  /* float: right; */
+  /* display: none; */
+  /* font-size: 13px; */
+  /* margin-left: 10px; */
+  /* margin-top: 8px; */
 }
 
 .display_remove {
-  display: inline;
+  /* display: inline; */
 }
 
 .section #entity_extra table {

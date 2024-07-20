@@ -7,8 +7,8 @@
       %table
         %tr
           %td
-            - if entity.attachments.present?
+          - if entity.attachments.present?
+            %ul
               - entity.attachments.each do |attach|
-                .attach_block
-                  = link_to attachment_preview(attach), download_attachment_path(attach), {title: attach.attachment_file_name}
-                  .file_name= file_name(attach)
+                %li
+                  = link_to "#{attach.filename} #{number_to_human_size(attach.byte_size)}", rails_blob_path(attach, disposition: "attachment")

@@ -19,6 +19,7 @@ Gem::Specification.new do |s|
 
   s.add_dependency "rails"
   s.add_dependency "fat_free_crm"
+  s.add_dependency "mini_magick"
   # s.add_dependency "paperclip"
 
   s.add_development_dependency "pg"

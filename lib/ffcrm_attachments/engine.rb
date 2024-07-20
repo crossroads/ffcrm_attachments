@@ -2,20 +2,27 @@ module FfcrmAttachments
   class Engine < ::Rails::Engine
 
     config.to_prepare do
-      require "polymorphic/attachment"
+      # require "polymorphic/attachment"
+      require "ffcrm_attachments/config"
+
+      # view hooks
       require "ffcrm_attachments/attachment_hook"
 
-      ActiveSupport.on_load(:fat_free_crm_attachment) do
+      # add attachments to Contacts, Accounts etc
+      ENTITIES.each do |entity|
+        entity.safe_constantize.class_eval do
+          has_many_attached :attachments, dependent: :destroy
+          validate :attachment_file_sizes
 
-        ENTITIES.each do |entity|
-          entity.safe_constantize.class_eval do
-            has_many :attachments, as: :entity, dependent: :destroy
-            accepts_nested_attributes_for :attachments,
-              allow_destroy: true, reject_if: lambda { |l| l[:attachment].blank? }
+          def attachment_file_sizes
+            unless attachments.collect{|f| f.blob.byte_size < FfcrmAttachments::Config.attachment_size}.all?
+              errors.add(:attachments, "File size is too big. Max size (per file): #{ActiveSupport::NumberHelper.number_to_human_size(FfcrmAttachments::Config.attachment_size)}")
+            end
           end
-        end
 
+        end
       end
+
     end
 
     config.generators do |g|
