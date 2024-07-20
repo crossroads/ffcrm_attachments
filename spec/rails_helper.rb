@@ -12,9 +12,6 @@ Rails.backtrace_cleaner.remove_silencers!
 # in spec/support/ and its subdirectories.
 Dir["./spec/support/**/*.rb"].sort.each {|f| require f}
 
-# fat_free_crm factories are already loaded but we need to include our custom factories dir also
-Dir["./spec/factories/**/*.rb"].sort.each {|f| require f}
-
 RSpec.configure do |config|
   # ## Mock Framework
   #
@@ -36,7 +33,7 @@ RSpec.configure do |config|
   # If true, the base class of anonymous controllers will be inferred
   # automatically. This will be the default behavior in future versions of
   # rspec-rails.
-  config.infer_base_class_for_anonymous_controllers = false
+  config.infer_base_class_for_anonymous_controllers = true
 
   # Run specs in random order to surface order dependencies. If you find an
   # order dependency and want to debug it, you can fix the order by providing
@@ -44,12 +41,11 @@ RSpec.configure do |config|
   #     --seed 1234
   config.order = "random"
 
-  # config.include RSpec::Rails::Matchers
+  config.include RSpec::Rails::Matchers
   config.include FactoryBot::Syntax::Methods
   config.include Devise::Test::ControllerHelpers, type: :controller
   config.include Devise::Test::ControllerHelpers, type: :view
   config.include Devise::Test::IntegrationHelpers, type: :request
   config.include Warden::Test::Helpers
   config.include DeviseHelpers
-
 end

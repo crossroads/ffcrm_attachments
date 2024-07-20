@@ -2,7 +2,6 @@ module FfcrmAttachments
   class Engine < ::Rails::Engine
 
     config.to_prepare do
-      # require "polymorphic/attachment"
       require "ffcrm_attachments/config"
 
       # view hooks

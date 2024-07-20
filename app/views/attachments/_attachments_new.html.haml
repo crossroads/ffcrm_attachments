@@ -4,7 +4,7 @@
 
 .section
   #entity_extra{ hidden_if(collapsed) }
-    %table{class: edit ? "edit_form" : "", 'attach_limit' => Setting.attachment_size }
+    %table{class: edit ? "edit_form" : "", 'attach_limit' => attachment_size }
       %tr
         %td
           %input{name: "authenticity_token", value: form_authenticity_token, type: "hidden"}
@@ -19,4 +19,4 @@
                     %i.fa.fa-times-circle
           .new_file
             = f.file_field 'attachments', id: 'attach', multiple: true
-            .error_msg Max file size: #{number_to_human_size(Setting.attachment_size)}
+            .error_msg Max file size: #{number_to_human_size(attachment_size)}

@@ -1,31 +1,22 @@
 require 'rails_helper'
 
-describe Attachment do
-
+describe "Attachment" do
   describe 'associations' do
-    it 'entity-attahment relation' do
-      contact = FactoryBot.create :contact
-      attach = FactoryBot.create :attachment, entity: contact
-
-      expect( contact.attachments.count ).to eq(1)
-    end
-
-    it 'dependent destroy' do
-      contact = FactoryBot.create :contact
-      attachments = FactoryBot.create_list :attachment, 3, entity: contact
-      expect { contact.destroy }.to change(Attachment, :count).by(-3)
+    it { expect(Contact.new.respond_to?('attachments')).to eql(true) }
+    it { expect(Account.new.respond_to?('attachments')).to eql(true) }
+    it { expect(Opportunity.new.respond_to?('attachments')).to eql(true) }
+    it { expect(Campaign.new.respond_to?('attachments')).to eql(true) }
+  end
+  describe 'validations' do
+    subject { FactoryBot.create(:contact) }
+    it do
+      subject.attachments.attach(
+        io: File.open(File.join('.', 'spec', 'files', 'image.jpg')),
+        filename: 'image.jpg',
+        content_type: 'image/jpeg'
+      )
+      expect(subject.attachments.size).to eql(1)
+      expect(subject).to be_valid
     end
   end
-
-  # describe 'instance methods' do
-  #   it 'is_image?' do
-  #     attach = FactoryBot.create :attachment
-  #     expect(attach.is_image?).to eq(true)
-  #   end
-
-  #   it 'should return preview image path' do
-  #     attach = FactoryBot.create :doc_attachment
-  #     expect( attach.to_default_image ).to eq("/assets/ffcrm_attachments/default-doc.png")
-  #   end
-  # end
 end
