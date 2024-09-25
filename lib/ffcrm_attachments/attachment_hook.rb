@@ -1,6 +1,6 @@
 module FfcrmAttachments
 
-  class AttachmentHook < FatFreeCRM::Callback::Base
+  class AttachmentHook < FatFreeCrm::Callback::Base
 
     insert_after :entity_form do |view, context|
       f = context[:f]
