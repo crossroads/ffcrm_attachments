@@ -1859,7 +1859,8 @@ defer(function() {
         
         for (const file of Array.from(this.files)) {
             if((file.type == "") || (file.size > attach_limit_size)) {
-                error_msg = (file.type == "") ? "Invalid file type" : "File size of "+ file.name +" is too big. <br> Please select your file(s) again. <br> Max allowed: " + formatBytes(attach_limit_size) + " Your File: " + formatBytes(file.size);
+                // Skip displaying file.name as no time to work on sanitization.
+                error_msg = (file.type == "") ? "Invalid file type" : "File size is too big. <br> Please select your file(s) again. <br> Max allowed: " + formatBytes(attach_limit_size) + " Your File: " + formatBytes(file.size);
                 parent_div.find('.error_msg').addClass('error').html(error_msg);
                 $(this).val('');
                 break;
