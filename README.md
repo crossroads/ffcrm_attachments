@@ -20,7 +20,7 @@ gem 'ffcrm_attachments', github: 'crossroads/ffcrm_attachments', branch: 'master
 ## TODO / NOT YET IMPLEMENTED
 
 * Virus validation
-* Add javascript to provide 'drag and drop' file capability when editting an entity
+* Add javascript to provide 'drag and drop' file capability when editing an entity
 * Implement security for the File class - it should be able to do whatever the parent class allows. (I.e. if you are allowed to see a contact, then you are allowed to download the attached file.)
 
 ## Local development
